@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #111; 
+            overflow: hidden; 
+            animation: fireworks 60s ease-in-out forwards;
+            background: url('background10.jpg') no-repeat center center fixed; 
+        }
+
+        #clock-container {
+            font-family: 'Digital-7 Mono', sans-serif; 
+            padding: 0.1px;
+            opacity: 0.5;
+            border-radius: 180px;
+            background: #a15c02b6; 
+            width: 1600px; 
+        }
+
+        #clock {
+            font-size: 20vw; 
+            color: #38291b
+            text-align: center;
+            letter-spacing: 0.07em;
+            font-weight: bold; 
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8); 
+            transition: color 0.5s, font-size 0.5s; 
+        }
+
+        @keyframes fireworks {
+			0% {
+				background-color: #111;
+			}
+			25% {
+				background-color: #000; 
+			}
+			50% {
+				background-color: #111;
+			}
+			75% {
+				background-color: #000; 
+			}
+			100% {
+				background-color: #111;
+			}
+		}
+
+    </style>
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            var timeString;
+
+            if (hours == 23 && minutes == 59) {
+                timeString = (60 - seconds).toString().padStart(2, '0'); 
+                document.getElementById('clock').style.color = '#FF0000'; 
+                document.getElementById('clock').style.fontSize = '40vw'; 
+                document.body.classList.add('fireworks'); 
+            } else {
+                timeString = hours + ':' + minutes + ':' + seconds;
+                document.getElementById('clock').style.color = '#FFFFFF'; 
+                document.getElementById('clock').style.fontSize = '17vw'; 
+                document.body.classList.remove('fireworks'); 
+            }
+
+            document.getElementById('clock').innerText = timeString;
+
+            setTimeout(updateClock, 1000); 
+        }
+
+        window.onload = updateClock;
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Digital-7+Mono&display=swap">
+    <title>New Year Countdown</title>
+</head>
+<body>
+    <div id="clock-container">
+        <div id="clock"></div>
+    </div>
+</body>
+</html>
